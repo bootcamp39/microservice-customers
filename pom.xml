@@ -8,13 +8,13 @@
 		<version>2.7.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.nttdata.microservice.bank-customers</groupId>
-	<artifactId>microservice.bank-customers</artifactId>
+	<groupId>com.nttdata</groupId>
+	<artifactId>microservice-customers</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>microservice.bank-customers</name>
-	<description>Clientes del banco</description>
+	<name>microservice-customers</name>
+	<description>Microservice Customers</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
