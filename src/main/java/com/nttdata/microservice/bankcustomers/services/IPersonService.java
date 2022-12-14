@@ -6,10 +6,15 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface IPersonService {
-	public Flux<PersonCollection> getAll() throws Exception;
-	public Mono<PersonCollection> getByCode(String code) throws Exception;
-	public Mono<String> getByType(String code) throws Exception;
-	public Mono<PersonCollection> save(PersonCollection collection) throws Exception;
-	public Mono<PersonCollection> update(PersonCollection updatedCollection, String code) throws Exception;
-	public Mono<Void> delete(String code) throws Exception;
+	
+	public Mono<PersonCollection> saveCustomerPersonal(PersonCollection collection);
+	public Mono<PersonCollection> saveCustomerEnterprise(PersonCollection collection);
+	
+	public Flux<PersonCollection> list();
+	
+	public Mono<Boolean> checkIfCustomerExist(String code);
+	public Mono<Boolean> checkIfCustomerPersonal(String code);
+	public Mono<Boolean> checkIfCustomerEnterprise(String code);
+	
+	
 }

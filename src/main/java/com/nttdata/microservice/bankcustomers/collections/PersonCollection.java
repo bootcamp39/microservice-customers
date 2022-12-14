@@ -20,23 +20,19 @@ public class PersonCollection {
 	private ObjectId id;
 	
 	private String code;
-	private String phone;
-	private String email;
-	private String address;
-	private String state;
 	private String personType;
 	
-	//LEGAL
+	//ENTERPRISE
 	private String ruc;
 	private String companyName;
 	
-	//PERSON
+	//PERSONAL
 	private String firstName;
 	private String lastName;
 	private String typeDocument;
 	private String numberDocument;
-	private Date birthday;
 	
+	private String state;
 	private Date createdAt;
 	private Date updatedAt;
 	private Date deletedAt;

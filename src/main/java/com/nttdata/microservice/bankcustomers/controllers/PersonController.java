@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nttdata.microservice.bankcustomers.collections.PersonCollection;
+import com.nttdata.microservice.bankcustomers.dto.EnterpriseDto;
+import com.nttdata.microservice.bankcustomers.dto.PersonalDto;
 import com.nttdata.microservice.bankcustomers.services.IPersonService;
 
 import reactor.core.publisher.Flux;
@@ -22,28 +23,45 @@ public class PersonController {
 	@Autowired
 	private IPersonService personService;
 
-	@GetMapping(value = "/list-all")
-	public Flux<PersonCollection> getAllPersons() throws Exception{
-		Flux<PersonCollection> list = personService.getAll();
-		return list;
+	@GetMapping(value = "/getCustomers")
+	public Flux<PersonCollection> getCustomers() throws Exception{
+		return personService.list();
 	}
 	
-	@PostMapping(value = "/store")
-	public Mono<PersonCollection> savePerson(@RequestBody PersonCollection person) throws Exception{
-		return personService.save(person);
+	@PostMapping(value = "/saveCustomerPersonal")
+	public Mono<PersonCollection> saveCustomerPersonal(@RequestBody PersonalDto dto) throws Exception{
+		PersonCollection collection = new PersonCollection();
+		collection.setFirstName(dto.getFirstName());
+		collection.setLastName(dto.getLastName());
+		collection.setNumberDocument(dto.getNumberDocument());
+		collection.setTypeDocument(dto.getTypeDocument());
+		return personService.saveCustomerPersonal(collection);
 	}
 	
-	@GetMapping("/find/{code}")
-	public Mono<PersonCollection> getPersonByCode(@PathVariable("code") String code)
+	@PostMapping(value = "/saveCustomerEnterprise")
+	public Mono<PersonCollection> saveCustomerEnterprise(@RequestBody EnterpriseDto dto) throws Exception{
+		PersonCollection collection = new PersonCollection();
+		collection.setCompanyName(dto.getCompanyName());
+		collection.setRuc(dto.getRuc());
+		return personService.saveCustomerEnterprise(collection);
+	}
+	
+	@GetMapping("/checkIfCustomerExist/{code}")
+	public Mono<Boolean> checkIfCustomerExist(@PathVariable("code") String code)
 			throws Exception {
-		return personService.getByCode(code);
+		return personService.checkIfCustomerExist(code);
 	}
 	
-	@GetMapping("/findType/{code}")
-	public Mono<String> getPersonTypeByCode(@PathVariable("code") String code)
+	@GetMapping("/checkIfCustomerPersonal/{code}")
+	public Mono<Boolean> checkIfCustomerPersonal(@PathVariable("code") String code)
 			throws Exception {
-		return personService.getByType(code);
+		return personService.checkIfCustomerPersonal(code);
 	}
 	
-
+	@GetMapping("/checkIfCustomerEnterprise/{code}")
+	public Mono<Boolean> checkIfCustomerEnterprise(@PathVariable("code") String code)
+			throws Exception {
+		return personService.checkIfCustomerEnterprise(code);
+	}
+	
 }
