@@ -16,5 +16,4 @@ public interface IPersonService {
 	public Mono<Boolean> checkIfCustomerPersonal(String code);
 	public Mono<Boolean> checkIfCustomerEnterprise(String code);
 	
-	
 }

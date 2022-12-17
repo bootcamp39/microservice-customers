@@ -62,8 +62,6 @@ public class PersonServiceImpl implements IPersonService{
 		} );
 	}
 
-	
-
 	/*@Override
 	public Flux<PersonCollection> getAll() throws Exception {
 		return personRepository.findAll();

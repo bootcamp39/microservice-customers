@@ -37,7 +37,4 @@ public class PersonCollection {
 	private Date updatedAt;
 	private Date deletedAt;
 	
-	
-	
-	
 }
