@@ -62,6 +62,4 @@ public class PersonServiceImpl implements IPersonService{
 			return Mono.just(collection.getPersonType().equals(PersonTypeEnum.ENTERPRISE.toString())?true:false);
 		} );
 	}
-
-
 }
