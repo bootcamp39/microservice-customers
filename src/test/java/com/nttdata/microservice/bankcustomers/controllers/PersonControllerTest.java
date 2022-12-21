@@ -38,7 +38,7 @@ class PersonControllerTest {
 
 	
 	@Test
-	@DisplayName("Test list all customer")
+	@DisplayName("Test list all customers")
 	void getCustomers() {
 		PersonCollection person = new PersonCollection();
 		person.setFirstName("Nombre");
