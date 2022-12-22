@@ -16,4 +16,10 @@ public interface IPersonService {
 	public Mono<Boolean> checkIfCustomerPersonal(String code);
 	public Mono<Boolean> checkIfCustomerEnterprise(String code);
 	
+	public Mono<String> findByCode(String code);
+
+	public Mono<String> findByCodeCached(String code);
+	
+	public Mono<PersonCollection> updateComment(String personCode, String code);
+	
 }
