@@ -1,5 +1,6 @@
 package com.nttdata.microservice.bankcustomers.collections;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(value = "persons")
-public class PersonCollection {
+public class PersonCollection implements Serializable {
 
 	@Id
 	private ObjectId id;
@@ -31,6 +32,7 @@ public class PersonCollection {
 	private String lastName;
 	private String typeDocument;
 	private String numberDocument;
+	private String comment;
 	
 	private String state;
 	private Date createdAt;

@@ -64,4 +64,17 @@ public class PersonController {
 		return personService.checkIfCustomerEnterprise(code);
 	}
 	
+	@GetMapping("/getByCode/{code}")
+	public Mono<String> getByCode(@PathVariable("code") String code)
+			throws Exception {
+		return personService.findByCode(code);
+	}
+	
+	@GetMapping("/getByCodeCached/{code}")
+	public Mono<String> getByCodeCached(@PathVariable("code") String code)
+			throws Exception {
+		return personService.findByCodeCached(code);
+	}
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.nttdata.microservice.bankcustomers.collections.PersonCollection;
@@ -61,5 +62,24 @@ public class PersonServiceImpl implements IPersonService{
 		return repository.findByCode(code).next().flatMap(collection -> {
 			return Mono.just(collection.getPersonType().equals(PersonTypeEnum.ENTERPRISE.toString())?true:false);
 		} );
+	}
+
+	@Override
+	public Mono<String> findByCode(String code) {
+		return repository.findByCode(code).next().map(x->x.getCode());
+	}
+
+	@Cacheable(value = "personCache")
+	@Override
+	public Mono<String> findByCodeCached(String code) {
+		return repository.findByCode(code).next().map(x->x.getCode()).cache();
+	}
+
+	@Override
+	public Mono<PersonCollection> updateComment(String personCode, String comment) {
+		return repository.findByCode(personCode).next().flatMap(collection -> {
+			collection.setComment(comment);
+			return repository.save(collection);
+		});
 	}
 }
